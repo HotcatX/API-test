@@ -6,5 +6,10 @@
   "tests_passed": 51,
   "local_http_smoke": "passed",
   "probability_checks": "passed",
-  "docker_validation": "pending GitHub Actions"
+  "docker_validation": "passed",
+  "workflow_url": "https://github.com/HotcatX/API-test/actions/runs/36946557373",
+  "verified_source_commit": "8fda33d1fcdea101ceab6a557e01b579cca8c564",
+  "ci_conclusion": "success",
+  "student": "He Xiao",
+  "uni": "hx2425"
 }
