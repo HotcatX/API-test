@@ -2,7 +2,6 @@
 name = "api-test"
 version = "1.0.0"
 description = "Assignment 1: spaCy word embeddings and bigram text generation with FastAPI"
-readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "en-core-web-md",

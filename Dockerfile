@@ -7,7 +7,7 @@ ENV UV_LINK_MODE=copy \
     PYTHONUNBUFFERED=1
 WORKDIR /code
 
-COPY pyproject.toml uv.lock README.md ./
+COPY pyproject.toml uv.lock ./
 # The locked dependencies include the spaCy model wheel. No model download is
 # needed when the container starts or when a request arrives.
 RUN uv sync --locked --no-dev --no-install-project
