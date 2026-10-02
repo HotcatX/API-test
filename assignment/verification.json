@@ -1,0 +1,10 @@
+{
+  "python": "3.12.2",
+  "spacy": "3.8.16",
+  "model": "en_core_web_md",
+  "model_version": "3.8.0",
+  "tests_passed": 51,
+  "local_http_smoke": "passed",
+  "probability_checks": "passed",
+  "docker_validation": "pending GitHub Actions"
+}

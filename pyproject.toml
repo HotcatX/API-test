@@ -1,0 +1,24 @@
+[project]
+name = "api-test"
+version = "1.0.0"
+description = "Assignment 1: spaCy word embeddings and bigram text generation with FastAPI"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "en-core-web-md",
+    "fastapi[standard]",
+    "spacy>=3.8,<3.9",
+]
+
+[dependency-groups]
+dev = ["httpx", "pytest"]
+submission = [
+    "reportlab>=4.4,<5",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[tool.uv.sources]
+en-core-web-md = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl" }

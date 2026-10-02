@@ -1,0 +1,102 @@
+{
+  "source": "Assignment1-1.pdf, section 3, Questions 1-6",
+  "logarithm_base": 2,
+  "questions": [
+    {
+      "question": 1,
+      "title": "Independent events",
+      "given": ["P(A) = 0.4", "P(B) = 0.3", "A and B are independent"],
+      "steps": [
+        "P(A intersection B) = P(A) P(B) = 0.4 * 0.3 = 0.12 = 3/25.",
+        "P(A union B) = P(A) + P(B) - P(A intersection B) = 0.4 + 0.3 - 0.12 = 0.58 = 29/50."
+      ],
+      "results": {
+        "intersection": {"exact": "3/25", "value": 0.12},
+        "union": {"exact": "29/50", "value": 0.58}
+      }
+    },
+    {
+      "question": 2,
+      "title": "Testing independence",
+      "given": ["P(A) = 0.5", "P(B) = 0.4", "P(A | B) = 0.7"],
+      "steps": [
+        "Since P(B) > 0, independence requires P(A | B) = P(A).",
+        "0.7 does not equal 0.5; knowing B occurred changes the probability of A. The events are not independent.",
+        "Intersection check: P(A intersection B) = 0.7 * 0.4 = 0.28 = 7/25, but P(A) P(B) = 0.5 * 0.4 = 0.20 = 1/5. These are unequal."
+      ],
+      "results": {
+        "independent": false,
+        "intersection": {"exact": "7/25", "value": 0.28},
+        "product_of_marginals": {"exact": "1/5", "value": 0.2}
+      }
+    },
+    {
+      "question": 3,
+      "title": "Bayes' rule",
+      "given": ["P(A) = 0.6", "P(B | A) = 0.5", "P(B | not A) = 0.2"],
+      "steps": [
+        "P(not A) = 1 - 0.6 = 0.4.",
+        "P(B) = P(B | A) P(A) + P(B | not A) P(not A) = 0.5 * 0.6 + 0.2 * 0.4 = 0.30 + 0.08 = 0.38 = 19/50.",
+        "P(A | B) = P(B | A) P(A) / P(B) = 0.30 / 0.38 = 15/19, approximately 0.789474 or 78.95%."
+      ],
+      "results": {
+        "probability_b": {"exact": "19/50", "value": 0.38},
+        "posterior": {"exact": "15/19", "value": 0.7894736842105263}
+      }
+    },
+    {
+      "question": 4,
+      "title": "Positive test result",
+      "given": ["D means disease; positive means a positive test result", "P(D) = 0.02", "P(positive | D) = 0.95", "P(negative | not D) = 0.90"],
+      "steps": [
+        "P(not D) = 1 - 0.02 = 0.98.",
+        "The false positive rate is P(positive | not D) = 1 - 0.90 = 0.10.",
+        "P(positive) = 0.95 * 0.02 + 0.10 * 0.98 = 0.019 + 0.098 = 0.117 = 117/1000.",
+        "P(D | positive) = 0.019 / 0.117 = 19/117, approximately 0.162393 or 16.24%.",
+        "Frequency check: with the supplied rates, 10,000 people give 190 true positives and 980 false positives; 190/(190+980) = 19/117."
+      ],
+      "results": {
+        "false_positive_rate": {"exact": "1/10", "value": 0.1},
+        "positive_probability": {"exact": "117/1000", "value": 0.117},
+        "posterior": {"exact": "19/117", "value": 0.1623931623931624}
+      }
+    },
+    {
+      "question": 5,
+      "title": "Expected value, variance, and sample mean",
+      "given": ["Scores: 85, 90, 95, 100", "Probabilities: 3/8, 3/8, 1/8, 1/8", "Sample: 85, 90, 85, 95, 90, 85, 100, 90"],
+      "steps": [
+        "E[X] = 85(0.375) + 90(0.375) + 95(0.125) + 100(0.125) = 31.875 + 33.750 + 11.875 + 12.500 = 90 points.",
+        "E[X squared] = 85^2(0.375) + 90^2(0.375) + 95^2(0.125) + 100^2(0.125) = 2709.375 + 3037.500 + 1128.125 + 1250.000 = 8125.",
+        "Var(X) = E[X squared] - E[X]^2 = 8125 - 8100 = 25 points squared. This is the distribution variance, not an estimated sample variance.",
+        "Check: Var(X) = (-5)^2(0.375) + 0^2(0.375) + 5^2(0.125) + 10^2(0.125) = 9.375 + 0 + 3.125 + 12.500 = 25.",
+        "Sample mean = (85+90+85+95+90+85+100+90)/8 = 720/8 = 90 points.",
+        "The sample mean equals E[X] for this sample because its observed proportions exactly match the given probabilities. Other random samples need not have mean 90."
+      ],
+      "results": {
+        "expectation": {"exact": "90", "value": 90},
+        "second_moment": {"exact": "8125", "value": 8125},
+        "variance": {"exact": "25", "value": 25},
+        "sample_sum": {"exact": "720", "value": 720},
+        "sample_mean": {"exact": "90", "value": 90},
+        "sample_mean_minus_expectation": {"exact": "0", "value": 0}
+      }
+    },
+    {
+      "question": 6,
+      "title": "Entropy in bits",
+      "given": ["Message probabilities: 0.4, 0.3, 0.2, 0.1", "Logarithms use base 2"],
+      "steps": [
+        "H(X) = -sum(p log2(p)) = -[0.4 log2(0.4) + 0.3 log2(0.3) + 0.2 log2(0.2) + 0.1 log2(0.1)].",
+        "Contributions in bits: 0.5287712379549449 + 0.5210896782498619 + 0.46438561897747244 + 0.33219280948873625.",
+        "H(X) = 1.8464393446710154 bits, approximately 1.84644 bits.",
+        "For four equally likely messages, each probability is 1/4 and log2(1/4) = -2.",
+        "H(uniform) = -4[(1/4) log2(1/4)] = -4[(1/4)(-2)] = 2 bits. This is the maximum entropy for four messages, log2(4)."
+      ],
+      "results": {
+        "entropy_bits": {"exact": "-(2/5)log2(2/5)-(3/10)log2(3/10)-(1/5)log2(1/5)-(1/10)log2(1/10)", "value": 1.8464393446710154},
+        "uniform_entropy_bits": {"exact": "2", "value": 2}
+      }
+    }
+  ]
+}

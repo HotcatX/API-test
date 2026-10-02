@@ -1,0 +1,44 @@
+name: Verify assignment
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Python tests and probability calculations
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.12.19"
+          enable-cache: true
+      - run: uv sync --locked
+      - run: uv run pytest -q
+      - run: uv run python scripts/check_probability.py
+
+  docker:
+    name: Build Docker image and query real model
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image with the pretrained spaCy model
+        run: docker build -t api-test:ci .
+      - name: Start container
+        run: docker run -d --name api-test-ci -p 127.0.0.1:8000:80 api-test:ci
+      - name: Check API over HTTP
+        run: python3 scripts/smoke_api.py
+      - name: Print container logs
+        if: always()
+        run: docker logs api-test-ci || true
+      - name: Stop container
+        if: always()
+        run: docker rm -f api-test-ci || true

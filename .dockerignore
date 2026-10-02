@@ -1,0 +1,14 @@
+.venv
+.git
+__pycache__
+*.pyc
+.pytest_cache
+.DS_Store
+.env
+.env.*
+tests
+assignment
+output
+tmp
+scripts
+.github
