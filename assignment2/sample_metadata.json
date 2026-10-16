@@ -1,0 +1,24 @@
+{
+  "image": "assignment2/sample_cat.png",
+  "dataset": "CIFAR-10",
+  "split": "test",
+  "index": 0,
+  "true_class_index": 3,
+  "true_class": "cat",
+  "selection": "Fixed test index 0, independent of model prediction",
+  "predicted_class": "cat",
+  "predicted_class_index": 3,
+  "confidence": 0.6336060166358948,
+  "probabilities": {
+    "airplane": 0.049672890454530716,
+    "automobile": 0.0007287086918950081,
+    "bird": 0.06305582821369171,
+    "cat": 0.6336060166358948,
+    "deer": 0.0013369920197874308,
+    "dog": 0.2106061577796936,
+    "frog": 0.010417466051876545,
+    "horse": 0.0012900045840069652,
+    "ship": 0.02793220244348049,
+    "truck": 0.0013537168269976974
+  }
+}

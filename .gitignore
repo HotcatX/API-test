@@ -8,3 +8,5 @@ __pycache__/
 !.env.example
 tmp/
 .ruff_cache/
+.ipynb_checkpoints/
+data/

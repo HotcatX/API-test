@@ -12,3 +12,7 @@ output
 tmp
 scripts
 .github
+*.ipynb
+.ipynb_checkpoints
+data
+assignment2

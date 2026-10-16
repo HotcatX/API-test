@@ -1,0 +1,30 @@
+{
+  "local_tests": {
+    "command": "uv run --all-groups pytest -q",
+    "passed": 68
+  },
+  "notebook": {
+    "file": "Assignment2_code.ipynb",
+    "cells": 32,
+    "executed_code_cells": 11,
+    "errors": 0,
+    "sha256": "a89d1cd088020e902b2f740077fe4db6e5806b9968264b8ae70d42f166bd7f5b"
+  },
+  "local_http_smoke": {
+    "command": "uv run --all-groups python scripts/smoke_api.py",
+    "passed": true,
+    "base_url": "http://127.0.0.1:8000"
+  },
+  "checkpoint_sha256": "60b6a211c0ae0f11ec516c5fe7a86b245c5e2ca96b09cf45a211df84705b7030",
+  "test_accuracy": 0.7042,
+  "test_correct": 7042,
+  "test_total": 10000,
+  "pdf": {
+    "file": "output/pdf/Assignment2_Submission.pdf",
+    "pages": 12,
+    "math_expressions": 66,
+    "math_errors": 0,
+    "visual_qa": "All 12 final pages reviewed; no clipping, overlap, missing formulas or blank pages.",
+    "sha256": "0fb86be54a00be5fb0ce37e134255503408121e93c23993730211d0040bb05de"
+  }
+}

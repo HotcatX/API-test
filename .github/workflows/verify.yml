@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   tests:
-    name: Python tests and probability calculations
+    name: API, CNN, and calculation tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
@@ -25,7 +25,7 @@ jobs:
       - run: uv run python scripts/check_probability.py
 
   docker:
-    name: Build Docker image and query real model
+    name: Build Docker image and query trained models
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

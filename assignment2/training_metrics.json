@@ -1,0 +1,206 @@
+{
+  "dataset": "CIFAR-10",
+  "dataset_source": "https://www.cs.toronto.edu/~kriz/cifar.html",
+  "classes": [
+    "airplane",
+    "automobile",
+    "bird",
+    "cat",
+    "deer",
+    "dog",
+    "frog",
+    "horse",
+    "ship",
+    "truck"
+  ],
+  "architecture": "AssignmentCNN: Conv3-16-ReLU-Pool2-Conv16-32-ReLU-Pool2-Flatten8192-FC100-ReLU-FC10",
+  "parameter_count": 825398,
+  "preprocessing": {
+    "color_mode": "RGB",
+    "image_size": [
+      64,
+      64
+    ],
+    "resize_interpolation": "bilinear",
+    "tensor_range_before_normalization": [
+      0.0,
+      1.0
+    ],
+    "normalization_mean": [
+      0.5,
+      0.5,
+      0.5
+    ],
+    "normalization_std": [
+      0.5,
+      0.5,
+      0.5
+    ]
+  },
+  "training_augmentation": "Resize 64x64 bilinear; random crop 64x64 with reflect padding 8; random horizontal flip",
+  "train_count": 45000,
+  "validation_count": 5000,
+  "test_count": 10000,
+  "split": "torch.randperm(50000, generator=torch.Generator().manual_seed(seed)); first 45000 train, last 5000 validation",
+  "split_sha256": "55ecb6cd4e1eb48274001018b26a797b833f72ae79a02b388e4874497445b43d",
+  "seed": 42,
+  "epochs": 15,
+  "batch_size": 128,
+  "optimizer": "Adam",
+  "initial_learning_rate": 0.001,
+  "weight_decay": 0.0001,
+  "scheduler": "CosineAnnealingLR",
+  "minimum_learning_rate": 1e-05,
+  "loss": "CrossEntropyLoss on logits",
+  "device": "mps",
+  "pytorch_version": "2.8.0",
+  "determinism_note": "Seeds are fixed. Hardware/backend/library differences may change floating-point results, especially on MPS.",
+  "best_epoch": 15,
+  "best_validation_accuracy": 0.7012,
+  "checkpoint_selection": "Highest validation accuracy; test set not used for selection",
+  "test_evaluations": 1,
+  "test": {
+    "loss": 0.8505482408523559,
+    "accuracy": 0.7042,
+    "count": 10000,
+    "confusion_matrix_rows_true_columns_predicted": [
+      [
+        748,
+        30,
+        44,
+        18,
+        10,
+        6,
+        13,
+        10,
+        73,
+        48
+      ],
+      [
+        27,
+        837,
+        6,
+        7,
+        1,
+        4,
+        5,
+        5,
+        20,
+        88
+      ],
+      [
+        75,
+        7,
+        565,
+        56,
+        82,
+        75,
+        76,
+        37,
+        12,
+        15
+      ],
+      [
+        24,
+        17,
+        66,
+        501,
+        45,
+        191,
+        80,
+        38,
+        22,
+        16
+      ],
+      [
+        23,
+        6,
+        82,
+        54,
+        612,
+        38,
+        83,
+        89,
+        12,
+        1
+      ],
+      [
+        17,
+        5,
+        62,
+        169,
+        44,
+        617,
+        32,
+        40,
+        7,
+        7
+      ],
+      [
+        9,
+        5,
+        43,
+        51,
+        28,
+        15,
+        826,
+        10,
+        9,
+        4
+      ],
+      [
+        17,
+        3,
+        28,
+        47,
+        52,
+        62,
+        10,
+        759,
+        3,
+        19
+      ],
+      [
+        69,
+        43,
+        12,
+        9,
+        4,
+        9,
+        7,
+        0,
+        824,
+        23
+      ],
+      [
+        34,
+        126,
+        8,
+        12,
+        1,
+        5,
+        15,
+        16,
+        30,
+        753
+      ]
+    ],
+    "per_class_accuracy": {
+      "airplane": 0.748,
+      "automobile": 0.837,
+      "bird": 0.565,
+      "cat": 0.501,
+      "deer": 0.612,
+      "dog": 0.617,
+      "frog": 0.826,
+      "horse": 0.759,
+      "ship": 0.824,
+      "truck": 0.753
+    }
+  },
+  "started_at_utc": "2026-10-16T00:26:53.520445+00:00",
+  "finished_at_utc": "2026-10-16T00:28:13.936606+00:00",
+  "elapsed_seconds": 78.97847933298908,
+  "checkpoint": "models/cifar10_cnn.pt",
+  "checkpoint_sha256": "60b6a211c0ae0f11ec516c5fe7a86b245c5e2ca96b09cf45a211df84705b7030"
+}

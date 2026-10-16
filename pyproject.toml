@@ -1,16 +1,26 @@
 [project]
 name = "api-test"
-version = "1.0.0"
-description = "Assignment 1: spaCy word embeddings and bigram text generation with FastAPI"
+version = "2.0.0"
+description = "FastAPI text generation, word embeddings, and a trained CIFAR-10 CNN"
 requires-python = ">=3.12"
 dependencies = [
     "en-core-web-md",
     "fastapi[standard]",
     "spacy>=3.8,<3.9",
+    "torch==2.8.0",
+    "torchvision==0.23.0",
+    "pillow>=11.3,<12",
+    "python-multipart>=0.0.20",
 ]
 
 [dependency-groups]
 dev = ["httpx", "pytest"]
+notebook = [
+    "ipykernel>=7.4.0",
+    "nbclient>=0.11.0",
+    "nbconvert>=7.17.1",
+    "nbformat>=5.11.1",
+]
 submission = [
     "reportlab>=4.4,<5",
 ]
@@ -21,3 +31,14 @@ pythonpath = ["."]
 
 [tool.uv.sources]
 en-core-web-md = { url = "https://github.com/explosion/spacy-models/releases/download/en_core_web_md-3.8.0/en_core_web_md-3.8.0-py3-none-any.whl" }
+torch = [
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+    { index = "pytorch-cpu", marker = "sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

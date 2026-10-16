@@ -13,6 +13,7 @@ COPY pyproject.toml uv.lock ./
 RUN uv sync --locked --no-dev --no-install-project
 
 COPY app ./app
+COPY models ./models
 RUN useradd --create-home --uid 10001 api
 USER api
 EXPOSE 80

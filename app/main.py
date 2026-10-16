@@ -1,20 +1,29 @@
-"""FastAPI endpoints for the Module 3 activity and Assignment 1 word vectors."""
+"""FastAPI endpoints for text generation, word vectors, and image classification."""
 
 from typing import Annotated
 
-from fastapi import FastAPI, HTTPException, Query
+from fastapi import FastAPI, File, HTTPException, Query, UploadFile
 from pydantic import BaseModel, Field
 
 from app.bigram_model import BigramModel
 from app.embedding_model import ModelUnavailableError, get_word_embedding
+from app.image_classifier import (
+    MAX_UPLOAD_BYTES,
+    ClassifierUnavailableError,
+    ImageTooLargeError,
+    InvalidImageError,
+    UnsupportedImageError,
+    classify_image,
+)
 
 app = FastAPI(
-    title="Text Generation and Word Embedding API",
+    title="Text and Image Classification API",
     description=(
         "Generate text with the Module 3 bigram model and look up pretrained "
-        "300-dimensional spaCy word vectors for Assignment 1."
+        "300-dimensional spaCy word vectors for Assignment 1. "
+        "Classify uploaded images with the trained Assignment 2 CIFAR-10 CNN."
     ),
-    version="1.0.0",
+    version="2.0.0",
 )
 
 # Sample corpus from the Module 3 handout; unrelated to spaCy's pretrained vectors.
@@ -53,6 +62,17 @@ class EmbeddingResponse(BaseModel):
     model: str = Field(description="Name of the installed pretrained spaCy model.")
     dimensions: int = Field(description="Number of coordinates in the vector.")
     embedding: list[float] = Field(description="Full unmodified pretrained static word vector.")
+
+
+class ImageClassificationResponse(BaseModel):
+    predicted_class: str
+    class_id: int = Field(ge=0, le=9)
+    confidence: float = Field(
+        ge=0, le=1, description="Softmax score; not a calibrated probability of correctness."
+    )
+    probabilities: dict[str, float] = Field(description="Softmax scores for all ten CIFAR-10 classes.")
+    model: str
+    input_shape: list[int] = Field(description="Preprocessed PyTorch shape: batch, channels, height, width.")
 
 
 @app.get("/")
@@ -111,3 +131,39 @@ def embedding(
         dimensions=result.dimensions,
         embedding=result.embedding,
     )
+
+
+@app.post(
+    "/classify",
+    response_model=ImageClassificationResponse,
+    responses={
+        413: {"description": "File exceeds 5 MiB or image exceeds 16 million pixels."},
+        415: {"description": "Unsupported image format."},
+        422: {"description": "Missing, empty, or invalid image."},
+        503: {"description": "The trained classifier is unavailable."},
+    },
+)
+def classify(
+    file: Annotated[UploadFile, File(description="A PNG, JPEG, or WebP image (at most 5 MiB).")],
+) -> ImageClassificationResponse:
+    """Upload one image and return its predicted class from the ten CIFAR-10 labels.
+
+    Images are converted to RGB, resized to 64 x 64, and normalized exactly as
+    during training. Arbitrary images are still assigned one of the ten classes;
+    this model does not detect objects or have an unknown/reject class.
+    """
+    try:
+        # Bound the read, even when the upload's Content-Length is absent.
+        data = file.file.read(MAX_UPLOAD_BYTES + 1)
+        result = classify_image(data)
+    except ImageTooLargeError as exc:
+        raise HTTPException(status_code=413, detail=str(exc)) from exc
+    except UnsupportedImageError as exc:
+        raise HTTPException(status_code=415, detail=str(exc)) from exc
+    except InvalidImageError as exc:
+        raise HTTPException(status_code=422, detail=str(exc)) from exc
+    except ClassifierUnavailableError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    finally:
+        file.file.close()
+    return ImageClassificationResponse(**result)
