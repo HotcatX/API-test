@@ -1,0 +1,41 @@
+{
+  "assignment": 3,
+  "local_tests_passed": 96,
+  "local_pytest_seconds": 2.7,
+  "python": "3.12.14",
+  "pytorch": "2.8.0",
+  "local_http_validation": "passed",
+  "api_examples": [
+    {
+      "route": "/generate-digit?seed=42",
+      "status": 200,
+      "image": "assignment3/api_digit_seed42.png",
+      "dimensions": [
+        28,
+        28
+      ],
+      "mode": "L",
+      "seed": "42",
+      "sha256": "61323cd2e7d1642f2e0141b32a495803e9dca6af82c2629b16e9158b6516fee5"
+    },
+    {
+      "route": "/generate-digits",
+      "status": 200,
+      "image": "assignment3/api_grid_seed42.png",
+      "dimensions": [
+        118,
+        118
+      ],
+      "mode": "L",
+      "seed": "42",
+      "sha256": "20c35e1a90f1e27e211dd112f4614b4e7a5d94ac141b10370a59ea5d40a574cf"
+    }
+  ],
+  "docker_validation": "passed",
+  "docker_note": "Built and started on GitHub Actions Ubuntu; real HTTP checks passed for all original and GAN endpoints.",
+  "canvas_submission": "not_submitted",
+  "ci_tests": "passed",
+  "tested_commit": "44679c03330700831e69be4239863fa41304bd4f",
+  "workflow_url": "https://github.com/HotcatX/API-test/actions/runs/41283477512",
+  "ci_evidence": "assignment3/ci_verification.json"
+}

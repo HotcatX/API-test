@@ -1,0 +1,148 @@
+{
+  "repository": "HotcatX/API-test",
+  "tested_commit": "44679c03330700831e69be4239863fa41304bd4f",
+  "run_id": 41283477512,
+  "workflow_url": "https://github.com/HotcatX/API-test/actions/runs/41283477512",
+  "jobs": [
+    {
+      "id": 124779960649,
+      "name": "Build Docker image and query trained models",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41283477512,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Build image with the pretrained spaCy model",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Start container",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Check API over HTTP",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Print container logs",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Stop container",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 14
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 15
+        }
+      ]
+    },
+    {
+      "id": 124779960744,
+      "name": "API, CNN, GAN, and calculation tests",
+      "status": "completed",
+      "conclusion": "success",
+      "run_id": 41283477512,
+      "logs_url": null,
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2
+        },
+        {
+          "name": "Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3
+        },
+        {
+          "name": "Run uv sync --locked",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4
+        },
+        {
+          "name": "Run uv run pytest -q",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5
+        },
+        {
+          "name": "Run uv run python scripts/check_probability.py",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6
+        },
+        {
+          "name": "Post Run astral-sh/setup-uv@v6",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13
+        }
+      ]
+    }
+  ],
+  "smoke_checks": [
+    "PASS GET / (200)",
+    "PASS GET /embedding?word=apple (300 finite, nonzero vector values)",
+    "PASS unknown word rejected (422)",
+    "PASS POST /generate (200)",
+    "PASS POST /classify (trained CNN: cat, score=0.6336)",
+    "PASS invalid image rejected (422)",
+    "PASS GET /generate-digit (trained GAN, reproducible 28 x 28 grayscale PNG)",
+    "PASS POST /generate-digits (16 samples in a PNG grid)",
+    "PASS invalid GAN count rejected (422)",
+    "PASS GET /docs (200)"
+  ]
+}
