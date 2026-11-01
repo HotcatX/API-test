@@ -1,0 +1,43 @@
+{
+  "latent_dim": 100,
+  "architecture_version": 1,
+  "epochs": 20,
+  "seed": 42,
+  "train_count": 60000,
+  "dataset": "MNIST official training split",
+  "normalization": "uint8 / 127.5 - 1",
+  "noise_distribution": "standard normal N(0,1)",
+  "conditional": false,
+  "batch_size": 128,
+  "learning_rate": 0.0002,
+  "adam_betas": [
+    0.5,
+    0.999
+  ],
+  "trained_at_utc": "2026-11-01T07:01:01.039838+00:00",
+  "pytorch_version": "2.8.0",
+  "training_device": "mps",
+  "generator_parameters": 765761,
+  "discriminator_parameters": 138817,
+  "batches_per_epoch": 469,
+  "training_seconds": 198.92380525032058,
+  "final_losses": {
+    "epoch": 20,
+    "images_seen": 60000,
+    "discriminator_loss": 0.40406543016433716,
+    "generator_loss": 2.8145229816436768,
+    "mean_d_real": 0.8583348989486694,
+    "mean_d_fake_before_g_update": 0.14133211970329285,
+    "duration_seconds": 9.69990075007081
+  },
+  "sample_grid_count": 64,
+  "sample_grid_noise_seed": 2026,
+  "sample_selection": "First 64 noise draws using fixed CPU seed 2026; no outcome-based selection.",
+  "checkpoint_sha256": "5854d759b692c4887fb54e514ab3e676c60941c4a6e5606e6d3dc172b153f3ef",
+  "limitations": [
+    "Unconditional GAN: the API cannot request a particular digit class.",
+    "Losses are adversarial training diagnostics, not classification accuracy or proof of image quality.",
+    "The sample grid is a qualitative check; no FID, precision/recall, or coverage guarantee is claimed.",
+    "A fixed seed helps reproducibility, but floating-point/device differences may change training results."
+  ]
+}

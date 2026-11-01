@@ -4,6 +4,7 @@ import argparse
 import json
 import math
 from pathlib import Path
+import struct
 import time
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
@@ -96,6 +97,19 @@ def main():
     status, body = upload_image(args.base_url, b"not an image")
     assert status == 422, (status, body)
     print("PASS invalid image rejected (422)")
+    status, png = request(args.base_url, "/generate-digit?seed=42")
+    assert status == 200, (status, png)
+    assert png[:8] == b"\x89PNG\r\n\x1a\n" and png[12:16] == b"IHDR"
+    assert struct.unpack(">II", png[16:24]) == (28, 28)
+    assert png[24:26] == bytes([8, 0]), "Expected 8-bit grayscale PNG"
+    assert request(args.base_url, "/generate-digit?seed=42")[1] == png
+    print("PASS GET /generate-digit (trained GAN, reproducible 28 x 28 grayscale PNG)")
+    status, grid = request(args.base_url, "/generate-digits", {"count": 16, "seed": 42})
+    assert status == 200 and grid[:8] == b"\x89PNG\r\n\x1a\n"
+    assert struct.unpack(">II", grid[16:24]) == (118, 118)
+    print("PASS POST /generate-digits (16 samples in a PNG grid)")
+    assert request(args.base_url, "/generate-digits", {"count": 65})[0] == 422
+    print("PASS invalid GAN count rejected (422)")
     status, body = request(args.base_url, "/docs")
     assert status == 200 and b"SwaggerUIBundle" in body
     print("PASS GET /docs (200)")

@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   tests:
-    name: API, CNN, and calculation tests
+    name: API, CNN, GAN, and calculation tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
