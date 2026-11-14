@@ -1,0 +1,17 @@
+{
+  "purpose": "Initial small-CNN pilot used to select a weak spatial reference energy before final training",
+  "baseline_architecture_version": 1,
+  "baseline_epochs": 8,
+  "train_count": 50000,
+  "elapsed_seconds": 370.20783045934513,
+  "diagnostics": {
+    "initial_noise_mean_energy": 5.387290000915527,
+    "generated_mean_energy": 0.015752043575048447,
+    "first_128_training_images_mean_energy": -0.0004533105529844761
+  },
+  "visual_observation": "The fixed-seed100-step samples remained dominated by high-frequency noise despite lower energy.",
+  "decision": "Retrain from scratch with an explicit fixed adjacent-pixel quadratic smoothness prior of weight0.002; do not treat smoothness as evidence of learned object realism.",
+  "baseline_checkpoint_sha256_not_retained": "5e74b8660c2847be2c070407d88a81bcd8bba1c30c246a0b3697b1a426f09e9f",
+  "sample_seed": 2026,
+  "test_examples_used": 0
+}

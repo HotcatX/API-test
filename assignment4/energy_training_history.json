@@ -1,0 +1,90 @@
+[
+  {
+    "epoch": 1,
+    "examples": 50000,
+    "learning_rate": 0.0001,
+    "loss": 0.3713916632080078,
+    "contrastive_loss": 0.35324685758590696,
+    "regularization": 0.018144806185364723,
+    "real_energy": 0.17017008275985718,
+    "negative_energy": -0.1830767759126425,
+    "duration_seconds": 58.05886037508026
+  },
+  {
+    "epoch": 2,
+    "examples": 50000,
+    "learning_rate": 9.7e-05,
+    "loss": 0.343507531375885,
+    "contrastive_loss": 0.3322459928035736,
+    "regularization": 0.011261538750827313,
+    "real_energy": 0.1481828475999832,
+    "negative_energy": -0.1840631445169449,
+    "duration_seconds": 52.539141667075455
+  },
+  {
+    "epoch": 3,
+    "examples": 50000,
+    "learning_rate": 9.409e-05,
+    "loss": 0.296302679104805,
+    "contrastive_loss": 0.2876305016708374,
+    "regularization": 0.008672177564948797,
+    "real_energy": 0.14456717880010606,
+    "negative_energy": -0.14306332271575928,
+    "duration_seconds": 60.66536408383399
+  },
+  {
+    "epoch": 4,
+    "examples": 50000,
+    "learning_rate": 9.12673e-05,
+    "loss": 0.2511310921382904,
+    "contrastive_loss": 0.24443725737571717,
+    "regularization": 0.006693835352510214,
+    "real_energy": 0.12397054611206054,
+    "negative_energy": -0.12046671124458314,
+    "duration_seconds": 53.80061929207295
+  },
+  {
+    "epoch": 5,
+    "examples": 50000,
+    "learning_rate": 8.8529281e-05,
+    "loss": 0.21839267806053161,
+    "contrastive_loss": 0.212695453414917,
+    "regularization": 0.005697224593609571,
+    "real_energy": 0.10629647388935089,
+    "negative_energy": -0.10639897916078568,
+    "duration_seconds": 52.19392320886254
+  },
+  {
+    "epoch": 6,
+    "examples": 50000,
+    "learning_rate": 8.587340257e-05,
+    "loss": 0.1951121185016632,
+    "contrastive_loss": 0.19033248301029204,
+    "regularization": 0.004779635860025883,
+    "real_energy": 0.09460430849075317,
+    "negative_energy": -0.09572817470550538,
+    "duration_seconds": 45.60455704201013
+  },
+  {
+    "epoch": 7,
+    "examples": 50000,
+    "learning_rate": 8.329720049289999e-05,
+    "loss": 0.1760519807958603,
+    "contrastive_loss": 0.17195016803741456,
+    "regularization": 0.0041018131120502946,
+    "real_energy": 0.08616664205312728,
+    "negative_energy": -0.08578352625250817,
+    "duration_seconds": 45.58745374996215
+  },
+  {
+    "epoch": 8,
+    "examples": 50000,
+    "learning_rate": 8.079828447811299e-05,
+    "loss": 0.1598898367357254,
+    "contrastive_loss": 0.1562370491695404,
+    "regularization": 0.0036527876301854847,
+    "real_energy": 0.07743248566746712,
+    "negative_energy": -0.0788045633482933,
+    "duration_seconds": 45.283263583667576
+  }
+]

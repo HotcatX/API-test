@@ -1,0 +1,19 @@
+{
+  "checkpoint_sha256": "daeafe78d680c3ca85a5cb451a5a923b4565c1647de4439871cd4349ca565816",
+  "sampling16_cpu_seconds": 0.47051987517625093,
+  "sampling_steps": 100,
+  "shape": [
+    16,
+    3,
+    32,
+    32
+  ],
+  "minimum": -1.0,
+  "maximum": 0.9988255500793457,
+  "same_seed_reproduces": true,
+  "different_seed_changes": true,
+  "global_rng_unchanged": true,
+  "weights_and_parameter_gradients_unchanged": true,
+  "tests": "13 passed in tests/test_energy_model.py",
+  "visual_observation": "Fixed-seed output grids contain coarse colored textures and grain; they do not demonstrate reliable recognizable objects. The spatial prior suppresses some pixel noise."
+}

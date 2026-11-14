@@ -1,0 +1,43 @@
+{
+  "architecture_version": 1,
+  "base_channels": 16,
+  "prediction_type": "epsilon",
+  "timesteps": 100,
+  "schedule": "cosine, s=0.008, max_beta=0.999",
+  "epochs": 20,
+  "train_count": 50000,
+  "dataset": "CIFAR-10 official training split",
+  "image_size": 32,
+  "conditional": false,
+  "normalization": "uint8 / 127.5 - 1",
+  "seed": 42,
+  "batch_size": 128,
+  "learning_rate": 0.0003,
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "ema_decay": 0.995,
+  "trained_at_utc": "2026-11-14T02:51:25.818438+00:00",
+  "training_device": "mps",
+  "pytorch_version": "2.8.0",
+  "parameters": 297043,
+  "batches_per_epoch": 391,
+  "training_seconds": 624.2705581663176,
+  "final_training_mse": 0.06746990978717804,
+  "checkpoint_sha256": "3122aab9167e3f5e58e90e63d9d961c0f9f5b0554c59f63522822eedd8d586c3",
+  "sample_seed": 2026,
+  "sample_count": 16,
+  "sample_selection": "First 16 samples from private seed 2026; no outcome-based selection.",
+  "limitations": [
+    "Compact short training run; samples may be blurry or not recognizable.",
+    "Unconditional model; no class selection or coverage guarantee.",
+    "Denoising MSE measures noise-prediction performance, not perceptual quality; FID not measured.",
+    "Reproducibility is within the same checkpoint, device and runtime; not bitwise across hardware."
+  ],
+  "held_out_denoising": {
+    "epsilon_mse": 0.06292665237560868,
+    "zero_predictor_mse": 0.9999196007847786,
+    "count": 1024,
+    "noise_seed": 7341,
+    "split": "first 1024 official test images; evaluated after training"
+  }
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "epoch": 1,
+    "images_seen": 50000,
+    "epsilon_mse": 0.2699146866798401,
+    "duration_seconds": 36.9535361668095
+  },
+  {
+    "epoch": 2,
+    "images_seen": 50000,
+    "epsilon_mse": 0.1126369908452034,
+    "duration_seconds": 30.234194375108927
+  },
+  {
+    "epoch": 3,
+    "images_seen": 50000,
+    "epsilon_mse": 0.09479497373104095,
+    "duration_seconds": 30.672035542316735
+  },
+  {
+    "epoch": 4,
+    "images_seen": 50000,
+    "epsilon_mse": 0.08583603799343109,
+    "duration_seconds": 31.381785875186324
+  },
+  {
+    "epoch": 5,
+    "images_seen": 50000,
+    "epsilon_mse": 0.0810694694519043,
+    "duration_seconds": 31.14649529196322
+  },
+  {
+    "epoch": 6,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07902486622333527,
+    "duration_seconds": 29.859536666888744
+  },
+  {
+    "epoch": 7,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07561788707971573,
+    "duration_seconds": 32.44403358269483
+  },
+  {
+    "epoch": 8,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07440527528524399,
+    "duration_seconds": 29.700781791005284
+  },
+  {
+    "epoch": 9,
+    "images_seen": 50000,
+    "epsilon_mse": 0.0727740228176117,
+    "duration_seconds": 30.620453833136708
+  },
+  {
+    "epoch": 10,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07181468605995178,
+    "duration_seconds": 30.407313792034984
+  },
+  {
+    "epoch": 11,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07119173556566238,
+    "duration_seconds": 26.63535491703078
+  },
+  {
+    "epoch": 12,
+    "images_seen": 50000,
+    "epsilon_mse": 0.07140584290027618,
+    "duration_seconds": 29.2913211658597
+  },
+  {
+    "epoch": 13,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06955241411924362,
+    "duration_seconds": 32.5516581251286
+  },
+  {
+    "epoch": 14,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06967909634113312,
+    "duration_seconds": 31.221371083986014
+  },
+  {
+    "epoch": 15,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06912419945001602,
+    "duration_seconds": 31.41376887494698
+  },
+  {
+    "epoch": 16,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06866252422332764,
+    "duration_seconds": 32.3677297080867
+  },
+  {
+    "epoch": 17,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06829652190208435,
+    "duration_seconds": 31.581709458027035
+  },
+  {
+    "epoch": 18,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06696680188179016,
+    "duration_seconds": 31.49754783278331
+  },
+  {
+    "epoch": 19,
+    "images_seen": 50000,
+    "epsilon_mse": 0.0667949691414833,
+    "duration_seconds": 31.712727500125766
+  },
+  {
+    "epoch": 20,
+    "images_seen": 50000,
+    "epsilon_mse": 0.06746990978717804,
+    "duration_seconds": 32.577202583197504
+  }
+]

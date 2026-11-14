@@ -1,0 +1,37 @@
+{
+  "checks": {
+    "Local automated tests": "166 passed, 0 skipped",
+    "Numerical and autograd calculations": "Passed in the project .venv",
+    "Local HTTP checks (new and existing API endpoints)": "Passed",
+    "Seed replay, bounds, PNG shape, and gradient isolation": "Passed"
+  },
+  "checkpoint_sha256": {
+    "diffusion": "3122aab9167e3f5e58e90e63d9d961c0f9f5b0554c59f63522822eedd8d586c3",
+    "energy": "daeafe78d680c3ca85a5cb451a5a923b4565c1647de4439871cd4349ca565816"
+  },
+  "python": "/Users/cat/Documents/Github/inclasstest/.venv/bin/python",
+  "pytest": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "166",
+    "time": "4.390",
+    "timestamp": "2026-11-13T22:06:03.537324-05:00",
+    "hostname": "Mac-956.lan"
+  },
+  "http_checks": [
+    "PASS GET / (200)",
+    "PASS GET /embedding?word=apple (300 finite, nonzero vector values)",
+    "PASS unknown word rejected (422)",
+    "PASS POST /generate (200)",
+    "PASS POST /classify (trained CNN: cat, score=0.6336)",
+    "PASS invalid image rejected (422)",
+    "PASS GET /generate-digit (trained GAN, reproducible 28 x 28 grayscale PNG)",
+    "PASS POST /generate-digits (16 samples in a PNG grid)",
+    "PASS invalid GAN count rejected (422)",
+    "PASS /generate-diffusion (trained diffusion, reproducible RGB PNG and 4-image grid)",
+    "PASS /generate-energy (trained energy, reproducible RGB PNG and 4-image grid)",
+    "PASS GET /docs (200)"
+  ]
+}

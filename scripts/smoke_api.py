@@ -18,7 +18,7 @@ def request(base_url, path, payload=None):
         headers={"Content-Type": "application/json"},
     )
     try:
-        with urlopen(req, timeout=30) as response:
+        with urlopen(req, timeout=120) as response:
             return response.status, response.read()
     except HTTPError as exc:
         return exc.code, exc.read()
@@ -110,6 +110,19 @@ def main():
     print("PASS POST /generate-digits (16 samples in a PNG grid)")
     assert request(args.base_url, "/generate-digits", {"count": 65})[0] == 422
     print("PASS invalid GAN count rejected (422)")
+    for generator in ("diffusion", "energy"):
+        route = f"/generate-{generator}"
+        status, png = request(args.base_url, route + "?seed=42")
+        assert status == 200, (status, png)
+        assert png[:8] == b"\x89PNG\r\n\x1a\n" and png[12:16] == b"IHDR"
+        assert struct.unpack(">II", png[16:24]) == (32, 32)
+        assert png[24:26] == bytes([8, 2]), "Expected an 8-bit RGB PNG"
+        assert request(args.base_url, route + "?seed=42")[1] == png
+        status, grid = request(args.base_url, route, {"count": 4, "seed": 42})
+        assert status == 200 and grid[:8] == b"\x89PNG\r\n\x1a\n"
+        assert struct.unpack(">II", grid[16:24]) == (66, 66)
+        assert request(args.base_url, route, {"count": 17})[0] == 422
+        print(f"PASS {route} (trained {generator}, reproducible RGB PNG and 4-image grid)")
     status, body = request(args.base_url, "/docs")
     assert status == 200 and b"SwaggerUIBundle" in body
     print("PASS GET /docs (200)")

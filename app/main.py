@@ -1,4 +1,4 @@
-"""FastAPI endpoints for text, embeddings, classification, and GAN generation."""
+"""FastAPI endpoints for text, embeddings, classification, and image generation."""
 
 from typing import Annotated
 
@@ -7,6 +7,9 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from app.bigram_model import BigramModel
 from app.embedding_model import ModelUnavailableError, get_word_embedding
+from app.cifar_generator import MAX_IMAGES as MAX_CIFAR_IMAGES, generate_cifar_images
+from app.diffusion_model import DiffusionUnavailableError
+from app.energy_model import EnergyUnavailableError
 from app.digit_generator import (
     MAX_IMAGES,
     MAX_SEED,
@@ -24,14 +27,15 @@ from app.image_classifier import (
 )
 
 app = FastAPI(
-    title="Text, Image Classification, and GAN API",
+    title="Text and Image Models API",
     description=(
         "Generate text with the Module 3 bigram model and look up pretrained "
         "300-dimensional spaCy word vectors for Assignment 1. "
         "Classify uploaded images with the trained Assignment 2 CIFAR-10 CNN. "
-        "Generate handwritten digit images with the Assignment 3 MNIST GAN."
+        "Generate handwritten digit images with the Assignment 3 MNIST GAN. "
+        "Generate RGB images using the Assignment 4 CIFAR-10 diffusion and energy models."
     ),
-    version="3.0.0",
+    version="4.0.0",
 )
 
 # Sample corpus from the Module 3 handout; unrelated to spaCy's pretrained vectors.
@@ -89,6 +93,15 @@ class DigitGenerationRequest(BaseModel):
     seed: int | None = Field(
         default=None, ge=0, le=MAX_SEED, strict=True,
         description="Noise seed for reproducibility; it does not select a digit class.",
+    )
+
+
+class CifarGenerationRequest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    count: int = Field(default=4, ge=1, le=MAX_CIFAR_IMAGES, strict=True)
+    seed: int | None = Field(
+        default=None, ge=0, le=MAX_SEED, strict=True,
+        description="Random seed; the models are unconditional, so this does not select a class.",
     )
 
 
@@ -230,3 +243,60 @@ def generate_digit_grid(request: DigitGenerationRequest) -> Response:
     from the request. An incomplete last grid row contains blank padding tiles.
     """
     return digit_png_response(request.count, request.seed)
+
+
+CIFAR_RESPONSES = {
+    200: {"description": "Generated 32 x 32 RGB image(s) as a PNG.", "content": {"image/png": {}}},
+    422: {"description": "Invalid count or seed."},
+    503: {"description": "The required trained checkpoint is unavailable."},
+}
+
+
+def cifar_png_response(kind: str, count: int, seed: int | None) -> Response:
+    try:
+        result = generate_cifar_images(kind, count=count, seed=seed)
+    except (DiffusionUnavailableError, EnergyUnavailableError) as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    return Response(
+        content=result.png, media_type="image/png",
+        headers={
+            "X-Seed": str(result.seed), "X-Image-Count": str(result.count),
+            "X-Model": result.model, "Cache-Control": "no-store",
+        },
+    )
+
+
+@app.get("/generate-diffusion", response_class=Response, responses=CIFAR_RESPONSES)
+def generate_diffusion_image(
+    seed: Annotated[int | None, Query(ge=0, le=MAX_SEED)] = None,
+) -> Response:
+    """Generate one RGB sample through all trained DDPM denoising timesteps.
+
+    Starts from Gaussian noise. This small unconditional CIFAR-10 model does
+    not accept text prompts or class labels; recognizable objects are not guaranteed.
+    """
+    return cifar_png_response("diffusion", 1, seed)
+
+
+@app.post("/generate-diffusion", response_class=Response, responses=CIFAR_RESPONSES)
+def generate_diffusion_grid(request: CifarGenerationRequest) -> Response:
+    """Generate 1-16 RGB samples in a grid using the trained diffusion model."""
+    return cifar_png_response("diffusion", request.count, request.seed)
+
+
+@app.get("/generate-energy", response_class=Response, responses=CIFAR_RESPONSES)
+def generate_energy_image(
+    seed: Annotated[int | None, Query(ge=0, le=MAX_SEED)] = None,
+) -> Response:
+    """Generate one RGB image by finite-step Langevin sampling from random noise.
+
+    The model weights stay frozen. Only image pixels receive gradient updates.
+    Short chains are approximate samples, not guaranteed equilibrium samples.
+    """
+    return cifar_png_response("energy", 1, seed)
+
+
+@app.post("/generate-energy", response_class=Response, responses=CIFAR_RESPONSES)
+def generate_energy_grid(request: CifarGenerationRequest) -> Response:
+    """Generate 1-16 RGB samples in a grid using the trained energy model."""
+    return cifar_png_response("energy", request.count, request.seed)

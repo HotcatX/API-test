@@ -11,9 +11,12 @@ permissions:
 
 jobs:
   tests:
-    name: API, CNN, GAN, and calculation tests
+    name: API, trained models, and calculation tests
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    env:
+      OMP_NUM_THREADS: "2"
+      MKL_NUM_THREADS: "2"
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
@@ -23,11 +26,12 @@ jobs:
       - run: uv sync --locked
       - run: uv run pytest -q
       - run: uv run python scripts/check_probability.py
+      - run: uv run python scripts/check_assignment4_theory.py
 
   docker:
     name: Build Docker image and query trained models
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - name: Build image with the pretrained spaCy model

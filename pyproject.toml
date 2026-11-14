@@ -1,7 +1,7 @@
 [project]
 name = "api-test"
-version = "3.0.0"
-description = "FastAPI text generation, word embeddings, CIFAR-10 classification, and MNIST GAN generation"
+version = "4.0.0"
+description = "FastAPI text, embeddings, classification, GAN, diffusion, and energy-based image models"
 requires-python = ">=3.12"
 dependencies = [
     "en-core-web-md",
