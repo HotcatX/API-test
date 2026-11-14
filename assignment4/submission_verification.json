@@ -1,0 +1,20 @@
+{
+  "pages": 11,
+  "pdf_bytes": 352687,
+  "questions": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "clickable_repository_link": true,
+  "source_unchanged": true,
+  "notebook_sha256": "3f930b249f4d38e2de20bc4247026f65ec078a4ae02541864454831cea8008c0",
+  "visual_review": "All 11 rendered pages inspected; no clipping, overlap, or broken formulas.",
+  "pdf_sha256": "797c4405f29a7598b507ba3733d875af66e29c63a4e89658f6b97ad5b2af4dc6"
+}

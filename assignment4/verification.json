@@ -3,7 +3,9 @@
     "Local automated tests": "166 passed, 0 skipped",
     "Numerical and autograd calculations": "Passed in the project .venv",
     "Local HTTP checks (new and existing API endpoints)": "Passed",
-    "Seed replay, bounds, PNG shape, and gradient isolation": "Passed"
+    "Seed replay, bounds, PNG shape, and gradient isolation": "Passed",
+    "GitHub Actions Linux tests": "Passed",
+    "Docker build, container startup, and HTTP inference": "Passed on GitHub Actions"
   },
   "checkpoint_sha256": {
     "diffusion": "3122aab9167e3f5e58e90e63d9d961c0f9f5b0554c59f63522822eedd8d586c3",
